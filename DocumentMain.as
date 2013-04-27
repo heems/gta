@@ -6,6 +6,8 @@
 	
 	public class DocumentMain extends MovieClip {
 		private var player:Player;
+		private var keys:Array = [];
+
 		
 		public function DocumentMain() {
 			player = new Player();
@@ -13,7 +15,7 @@
 			thePlayer.x = stage.stageWidth * 0.5;
 			thePlayer.y = stage.stageHeight * 0.5;
 
-			this.addEventListener(Event.ENTER_FRAME, gameLoop);
+			this.addEventListener(Event.ENTER_FRAME, update);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			stage.addEventListener(KeyboardEvent.KEY_UP, keyUpHandler);			
 
@@ -21,46 +23,34 @@
 		
 		private function keyDownHandler(e:KeyboardEvent):void
 		{
-			switch (e.keyCode)
-			{
-				case 83 ://down
-					//  move bg
-					break;
-				case 68 ://right
-					//  move bg
-					break;
-				case 87 ://up
-					//  move bg
-					break;
-				case 65 :// left
-					//  move bg
-					break;
-				default:
-					break;
-			}
+			keys[e.keyCode] = true;
 		}		
 		
 		private function keyUpHandler(e:KeyboardEvent):void
 		{
-
-			switch (e.keyCode)
-			{
-				case 83 ://down
-					//  stop player anim
-					break;
-				case 68 ://right
-					
-					break;
-				case 87 ://up
-					
-					break;
-				case 65 :// left
-					
-					break;
-				default:
-					break;
-			}
+			keys[e.keyCode] = false;
 		}		
+		
+		public function update(e:Event):void
+		{
+			if (keys[Keyboard.RIGHT])
+			{
+				player.x += 5;
+			}
+			if (keys[Keyboard.LEFT])
+			{
+				player.x -= 5;
+			}
+			if (keys[Keyboard.UP]) 
+			{
+				player.y -= 5;
+			}
+			if (keys[Keyboard.DOWN])
+			{
+				player.y += 5;
+			}
+		}
+
 	}
 	
 }
