@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+*.swf
 *.pydevproject
 .project
 .metadata
